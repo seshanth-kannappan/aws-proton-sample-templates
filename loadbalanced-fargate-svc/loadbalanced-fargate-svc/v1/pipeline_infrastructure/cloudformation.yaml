@@ -63,7 +63,7 @@ Resources:
                     },
                     "pre_build": {
                       "commands": [
-                        "echo 'HEY WHATS GOING ON HERE!!!' "
+                        "echo 'HEY WHATS GOING ON HERE!!!' ",
                         "cd $CODEBUILD_SRC_DIR",
                         "$(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)",
                         "{{ pipeline.inputs.unit_test_command }}",
