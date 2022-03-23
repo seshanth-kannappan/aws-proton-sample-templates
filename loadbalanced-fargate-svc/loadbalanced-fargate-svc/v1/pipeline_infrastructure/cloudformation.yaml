@@ -63,6 +63,7 @@ Resources:
                     },
                     "pre_build": {
                       "commands": [
+                        "echo 'HEY WHATS GOING ON HERE!!!' "
                         "cd $CODEBUILD_SRC_DIR",
                         "$(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)",
                         "{{ pipeline.inputs.unit_test_command }}",
@@ -70,19 +71,13 @@ Resources:
                     },
                     "build": {
                       "commands": [
-                        "IMAGE_REPO_NAME=$repo_name",
-                        "IMAGE_TAG=$CODEBUILD_BUILD_NUMBER",
-                        "IMAGE_ID=
-              - Ref: AWS::AccountId
-              - >-
-                .dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG",
-                        "docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG -f {{ pipeline.inputs.dockerfile }} .",
-                        "docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $IMAGE_ID;",
-                        "docker push $IMAGE_ID"
+                        "echo 'I AM BUILDING THIS'",
+                        "mvn clean install"
                       ]
                     },
                     "post_build": {
                       "commands": [
+                        "echo 'HOOHAA'",
                         "aws proton --region $AWS_DEFAULT_REGION get-service --name $service_name | jq -r .service.spec > service.yaml",
                         "yq w service.yaml 'instances[*].spec.image' \"$IMAGE_ID\" > rendered_service.yaml"
                       ]
