@@ -71,6 +71,7 @@ Resources:
                     },
                     "build": {
                       "commands": [
+                        "mvn clean package",
                         "IMAGE_REPO_NAME=$repo_name",
                         "IMAGE_TAG=$CODEBUILD_BUILD_NUMBER",
                         "IMAGE_ID=
