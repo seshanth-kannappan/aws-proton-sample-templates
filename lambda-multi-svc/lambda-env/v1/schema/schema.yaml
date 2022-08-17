@@ -6,10 +6,13 @@ schema:
     EnvironmentInput:
       type: object
       description: "Input properties for my environment"
+      required:
+        - ttl_attribute
       properties:
         ttl_attribute:
+          title: "TTL attribute"
           type: string
-          description: "Which attribute to use as the ttl attribute"
+          description: "Which attribute to use as the TTL attribute"
           default: ttl
           minLength: 1
           maxLength: 100
